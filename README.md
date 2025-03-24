@@ -1,38 +1,7 @@
-# sv
+# Sveltekit Web Sockets
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+![image](https://github.com/user-attachments/assets/55f633a7-21f4-4723-9223-afdde16cd0e7)
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Socket Server Endpoint Logic
+- The socket server endpoint can be found at `src/routes/ws`. We create a socket connection using the experimental [ws](https://github.com/sveltejs/kit/pull/12973) sveltekit feautre which uses [crossws](https://crossws.unjs.io/) under the hood
+. see comments on the server endpoint to undersand logic and refer to crossws for documentation. The Endpoint is serverd on the root page file
