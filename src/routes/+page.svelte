@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { ChatBubble, ChatBubbleAvatar, ChatBubbleMessage, ChatMessageList } from '$lib';
+	import { ChatMessageList, ChatBubble, ChatBubbleAvatar, ChatBubbleMessage } from '$lib/index.js';
 	import { Button } from '$lib/components/ui/button';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import { Send } from 'lucide-svelte';
 	import { onMount } from 'svelte';
+	import ModeToggle from '$lib/components/ui/mode-toggle/ModeToggle.svelte';
 
 	let message = $state(undefined);
 	let chatmessages = $state([]) as Array<{
@@ -68,7 +69,7 @@
 	});
 </script>
 
-<div class="mx-auto grid max-w-md gap-2 py-10">
+<div class="mx-auto grid max-w-md gap-2 px-3 py-10">
 	<h1 class="text-center text-2xl">WebSocket Chat</h1>
 	<div class="h-65">
 		<ChatMessageList>
@@ -78,13 +79,13 @@
 						{message.content}
 					</div>
 				{:else}
-					<ChatBubble variant={message.sender === 'You' ? 'sent' : 'recieved'}>
+					<ChatBubble variant={message.sender === 'You' ? 'received' : 'sent'}>
 						<ChatBubbleAvatar
 							src={message.sender === 'You' ? myAvatar : message.avatar}
 							fallback={message.sender.substring(0, 2).toUpperCase()}
 						/>
 						<ChatBubbleMessage
-							variant={message.sender === 'You' ? 'sent' : 'recieved'}
+							variant={message.sender === 'You' ? 'received' : 'sent'}
 							isLoading={false}
 						>
 							{message.content}
@@ -110,9 +111,15 @@
 		}}
 		class="flex gap-1"
 	>
-		<Textarea bind:value={message} />
+		<Textarea
+			class="bg-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-16 max-h-12 w-full resize-none items-center rounded-md px-4 py-3 text-sm focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+			bind:value={message}
+		/>
 		<Button type="submit" size="icon" class="my-5 shrink-0 rounded-full">
 			<Send class="size-4" />
 		</Button>
 	</form>
+	<div class="mx-auto max-w-sm py-48">
+		<ModeToggle />
+	</div>
 </div>
